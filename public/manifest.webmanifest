@@ -1,0 +1,19 @@
+{
+  "name": "آبی‌بی",
+  "short_name": "آبی‌بی",
+  "lang": "fa",
+  "dir": "rtl",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "theme_color": "#99252c",
+  "background_color": "#faf8f4",
+  "icons": [
+    {
+      "src": "assets/image/app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

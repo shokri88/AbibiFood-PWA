@@ -1,0 +1,16 @@
+<section class="branch-content">
+  <span class="eyebrow">WELCOME TO ABIBI</span>
+  <h1>از کدوم شعبه سفارش می‌دی؟</h1>
+  @if (error()) {
+    <p class="app-error">{{ error() }} <button (click)="load()">تلاش دوباره</button></p>
+  }
+  @for (b of branches(); track b.id) {
+    <button class="branch-choice" (click)="select(b)">
+      <span class="branch-symbol">⌂</span
+      ><span
+        ><strong>{{ b.name }}</strong
+        ><small>{{ b.address || b.area }}</small></span
+      >
+    </button>
+  }
+</section>

@@ -1,0 +1,32 @@
+@if (error()) {
+  <p class="app-error">{{ error() }}</p>
+}
+@if (food(); as f) {
+  <section class="surface">
+    <div class="row g-4">
+      <div class="col-md-6"><img class="product-route-image" [src]="f.image" [alt]="f.name" /></div>
+      <div class="col-md-6">
+        <h1>{{ f.title || f.name }}</h1>
+        <p class="text-muted">{{ f.description }}</p>
+        <h2 class="h6 mt-4">تکمیل‌کننده‌های مجاز</h2>
+        @for (a of addons(); track a.id) {
+          <label class="form-check mb-2"
+            ><input
+              class="form-check-input"
+              type="checkbox"
+              [checked]="selected().includes(a.id)"
+              (change)="toggle(a.id)"
+            /><span>{{ a.name }} · {{ a.discountPrice ?? a.price | number }} تومان</span></label
+          >
+        } @empty {
+          <p class="small text-muted">افزودنی تعریف نشده است.</p>
+        }
+        <strong class="price d-block my-4">{{ total() | number }} تومان</strong
+        ><button class="btn btn-primary" (click)="add()" [disabled]="!f.standalone">
+          افزودن به سبد نمایشی
+        </button>
+        <p class="notice mt-3">{{ settings.text('noOrder') }}</p>
+      </div>
+    </div>
+  </section>
+}

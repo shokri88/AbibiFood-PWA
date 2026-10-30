@@ -1,0 +1,37 @@
+@if (!online()) {
+  <div class="offline-banner" role="status">{{ settings.text('offline') }}</div>
+}
+<header class="site-header">
+  <div class="container-xxl d-flex align-items-center gap-3 py-3">
+    <a routerLink="/home" class="brand"
+      ><img src="assets/image/logo.webp" alt="آبی‌بی" /><img
+        src="assets/image/abibi_seclogo.webp"
+        class="logotype-header"
+        alt="آبی‌بی"
+    /></a>
+    <nav class="d-none d-lg-flex gap-4 ms-4">
+      <a routerLink="/home" routerLinkActive="active">خانه</a
+      ><a routerLink="/menu" routerLinkActive="active">منوی غذا</a
+      ><a routerLink="/club" routerLinkActive="active">باشگاه</a>
+    </nav>
+    <a routerLink="/branches" class="branch-link ms-auto"
+      ><small>شعبه انتخاب‌شده</small><strong>{{ store.branch()?.name || 'انتخاب شعبه' }}</strong></a
+    ><a routerLink="/cart" class="icon-btn position-relative" aria-label="سبد خرید"
+      >♧<span class="cart-count">{{ store.count() }}</span></a
+    >
+  </div>
+  @if (settings.config().mode === 'template') {
+    <div class="demo-strip">{{ settings.text('template') }}</div>
+  }
+</header>
+<main class="container-xxl main-content route-content"><router-outlet /></main>
+<nav class="bottom-nav d-lg-none" aria-label="ناوبری موبایل">
+  <a routerLink="/home" routerLinkActive="active"><span>⌂</span><small>خانه</small></a
+  ><a routerLink="/menu" routerLinkActive="active"><span>▦</span><small>منو</small></a
+  ><a routerLink="/cart" routerLinkActive="active" class="nav-cart"
+    ><span class="nav-icon"
+      >♧<b class="nav-count">{{ store.count() }}</b></span
+    ><small>سبد خرید</small></a
+  ><a routerLink="/club" routerLinkActive="active"><span>✦</span><small>باشگاه</small></a
+  ><a routerLink="/account" routerLinkActive="active"><span>○</span><small>حساب من</small></a>
+</nav>

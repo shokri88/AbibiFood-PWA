@@ -1,0 +1,31 @@
+<div class="row g-3 align-items-center">
+  <div class="col-md-7"><h1>منوی آبی‌بی</h1></div>
+  <div class="col-md-5">
+    <label class="visually-hidden" for="search">جست‌وجو</label
+    ><input
+      id="search"
+      class="form-control"
+      placeholder="دنبال چی می‌گردی؟"
+      [ngModel]="query()"
+      (ngModelChange)="query.set($event)"
+    />
+  </div>
+</div>
+<div class="categories">
+  <button class="category" (click)="group.set(0)">همه</button>
+  @for (g of menu().groups; track g.id) {
+    <button class="category" [class.active]="group() === g.id" (click)="group.set(g.id)">
+      {{ g.title }}
+    </button>
+  }
+</div>
+@if (error()) {
+  <p class="app-error">{{ error() }} <button (click)="load()">تلاش دوباره</button></p>
+}
+<div class="row g-3">
+  @for (f of list(); track f.id) {
+    <div class="col-6 col-lg-3"><app-food-card [food]="f" /></div>
+  } @empty {
+    <p class="text-muted">غذایی برای نمایش وجود ندارد.</p>
+  }
+</div>

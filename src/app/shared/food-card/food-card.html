@@ -1,0 +1,22 @@
+<article class="food-card">
+  <a [routerLink]="['/food', food().id]"
+    ><img class="food-image" [src]="food().image" [alt]="food().name" loading="lazy"
+  /></a>
+  <div class="card-body">
+    <h3>
+      <a [routerLink]="['/food', food().id]">{{ food().name }}</a>
+    </h3>
+    <p>{{ food().description }}</p>
+    <div class="d-flex justify-content-between align-items-center">
+      <div>
+        @if (food().discountPrice != null) {
+          <del class="text-muted small">{{ food().price | number }} </del>
+        }
+        <strong class="price"
+          >{{ food().discountPrice ?? food().price | number }} <small>تومان</small></strong
+        >
+      </div>
+      <a class="btn btn-primary btn-sm" [routerLink]="['/food', food().id]">انتخاب</a>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,61 @@
+@import '../public/assets/vendor/bootstrap/bootstrap.rtl.min.css';
+@import '../public/assets/css/style-02.css';
+@import '../public/assets/css/hasti.css';
+/* فقط سازگاری کامپوننت‌های Angular؛ پالت و قالب شخصی‌سازی‌شده از مرجع اصلی هستند. */
+app-root {
+  display: block;
+}
+.route-content {
+  min-height: 60vh;
+}
+.product-route-image {
+  width: 100%;
+  max-height: 420px;
+  object-fit: contain;
+}
+.app-error {
+  padding: 20px;
+  border-radius: 12px;
+  background: #fff0ed;
+  color: #92252c;
+  margin: 20px 0;
+}
+.bottom-nav .nav-icon svg {
+  width: 23px;
+  height: 23px;
+}
+.page-info {
+  font-size: 12px;
+  color: #8c7965;
+}
+.food-card .card-body {
+  padding: 16px;
+}
+.deal-track {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 12px 0;
+}
+.deal-track .food-card {
+  min-width: 220px;
+  flex: 0 0 23%;
+  scroll-snap-align: start;
+}
+.offline-banner {
+  padding: 10px;
+  text-align: center;
+  background: #f8e6be;
+  color: #633f23;
+}
+.section-heading {
+  gap: 15px;
+}
+.button-like {
+  border: 0;
+  background: none;
+}
+.food-card h3 {
+  font-size: 16px;
+}

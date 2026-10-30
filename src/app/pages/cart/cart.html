@@ -1,0 +1,29 @@
+<h1>سبد خرید</h1>
+<section class="surface">
+  @for (line of store.cart(); track $index) {
+    <div class="cart-item">
+      <img [src]="food(line.foodId)?.image || 'assets/image/logo.webp'" alt="غذا" />
+      <div class="flex-grow-1">
+        <h2 class="h6">{{ food(line.foodId)?.name || 'در حال دریافت اطلاعات' }}</h2>
+        <p>
+          @for (id of line.addonIds; track id) {
+            <span> + {{ food(id)?.name }}</span>
+          }
+        </p>
+        <div class="qty">
+          <button (click)="store.quantity($index, 1)" aria-label="افزایش">+</button
+          ><span>{{ line.quantity }}</span
+          ><button (click)="store.quantity($index, -1)" aria-label="کاهش">−</button>
+        </div>
+      </div>
+      <strong>{{ lineTotal(line.foodId, line.addonIds, line.quantity) | number }} تومان</strong>
+    </div>
+  } @empty {
+    <p>سبدت هنوز خالیه.</p>
+    <a routerLink="/menu">مشاهده منو ←</a>
+  }
+  <div class="summary-line total">
+    <strong>جمع</strong><strong>{{ total() | number }} تومان</strong>
+  </div>
+  <p class="notice">{{ settings.text('noOrder') }}</p>
+</section>
