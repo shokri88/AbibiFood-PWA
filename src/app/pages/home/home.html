@@ -34,7 +34,7 @@
 </div>
 <div class="row g-3">
   @for (f of standalone().slice(0, 4); track f.id) {
-    <div class="col-6 col-lg-3"><app-food-card [food]="f" /></div>
+    <div class="col-6 col-lg-3"><app-food-card [food]="f" [menu]="menu()" /></div>
   }
 </div>
 @if (hasOffers()) {
@@ -43,7 +43,7 @@
     <div class="deal-track">
       @for (f of standalone(); track f.id) {
         @if (f.discountPrice != null) {
-          <app-food-card [food]="f" />
+          <app-food-card [food]="f" [menu]="menu()" />
         }
       }
     </div>
@@ -55,6 +55,6 @@
 </div>
 <div class="row g-3">
   @for (f of standalone().slice(4, 8); track f.id) {
-    <div class="col-6 col-lg-3"><app-food-card [food]="f" /></div>
+    <div class="col-6 col-lg-3"><app-food-card [food]="f" [menu]="menu()" /></div>
   }
 </div>

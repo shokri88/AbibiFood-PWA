@@ -37,7 +37,7 @@ export class CatalogService {
       const names = [...new Set(TEMPLATE_DATA.products.map((p) => p.cat))];
       return {
         groups: names.map((title, i) => ({ id: i + 1, title })),
-        addons: [],
+        addons: TEMPLATE_DATA.addons,
         foods: TEMPLATE_DATA.products.map((p) => ({
           id: p.id,
           name: p.name,

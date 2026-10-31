@@ -37,3 +37,38 @@ describe('سبد نمایشی تا قبل از فاز فروش', () => {
     expect(store.count()).toBe(1);
   });
 });
+
+describe('کنترل تعداد غذا از روی کارت', () => {
+  beforeEach(() => sessionStorage.clear());
+  it('مجموع یک غذا را جدا از بقیه غذاها نشان می‌دهد', () => {
+    const store = new StoreService();
+    store.add(1, [2]);
+    store.add(1, [3]);
+    store.add(4);
+    expect(store.foodQuantity(1)).toBe(2);
+    expect(store.foodQuantity(4)).toBe(1);
+  });
+  it('آخرین ترکیب را تکرار می‌کند و ترکیب بدون افزودنی ناخواسته نمی‌سازد', () => {
+    const store = new StoreService();
+    store.add(1, [2]);
+    store.add(1, [3]);
+    store.increaseFood(1);
+    expect(store.cart()).toEqual([
+      { foodId: 1, addonIds: [2], quantity: 1 },
+      { foodId: 1, addonIds: [3], quantity: 2 },
+    ]);
+    store.decreaseFood(1);
+    store.decreaseFood(1);
+    expect(store.cart()).toEqual([{ foodId: 1, addonIds: [2], quantity: 1 }]);
+    store.decreaseFood(1);
+    store.decreaseFood(1);
+    expect(store.foodQuantity(1)).toBe(0);
+  });
+  it('محدودیت بیست عدد در هر ترکیب حفظ می‌شود', () => {
+    const store = new StoreService();
+    store.add(1, [2]);
+    for (let i = 0; i < 25; i++) store.increaseFood(1);
+    expect(store.foodQuantity(1)).toBe(20);
+    expect(new StoreService().cart()).toEqual(store.cart());
+  });
+});

@@ -1,22 +1,96 @@
 <article class="food-card">
-  <a [routerLink]="['/food', food().id]"
-    ><img class="food-image" [src]="food().image" [alt]="food().name" loading="lazy"
-  /></a>
+  <a [routerLink]="['/food', food().id]" [attr.aria-label]="'اطلاعات تکمیلی ' + food().name">
+    <img class="food-image" [src]="food().image" [alt]="food().name" loading="lazy" />
+  </a>
   <div class="card-body">
     <h3>
       <a [routerLink]="['/food', food().id]">{{ food().name }}</a>
     </h3>
     <p>{{ food().description }}</p>
-    <div class="d-flex justify-content-between align-items-center">
-      <div>
-        @if (food().discountPrice != null) {
-          <del class="text-muted small">{{ food().price | number }} </del>
-        }
-        <strong class="price"
-          >{{ food().discountPrice ?? food().price | number }} <small>تومان</small></strong
+    <div class="food-card-price">
+      @if (food().discountPrice != null) {
+        <del class="text-muted small">{{ food().price | number }}</del>
+      }
+      <strong class="price"
+        >{{ food().discountPrice ?? food().price | number }} <small>تومان</small></strong
+      >
+    </div>
+    <div class="food-card-actions">
+      <a class="food-details" [routerLink]="['/food', food().id]">اطلاعات تکمیلی</a>
+      @if (quantity() > 0) {
+        <div
+          class="card-quantity"
+          role="group"
+          [attr.aria-label]="'تعداد ' + food().name + ' در سبد'"
         >
-      </div>
-      <a class="btn btn-primary btn-sm" [routerLink]="['/food', food().id]">انتخاب</a>
+          <button
+            type="button"
+            (click)="increase()"
+            [disabled]="!canIncrease()"
+            [attr.aria-label]="'افزایش ' + food().name"
+          >
+            +
+          </button>
+          <span aria-live="polite">{{ quantity() | number }}</span>
+          <button type="button" (click)="decrease()" [attr.aria-label]="'کاهش ' + food().name">
+            −
+          </button>
+        </div>
+      } @else {
+        <button
+          type="button"
+          class="btn btn-primary btn-sm card-add"
+          (click)="increase()"
+          [disabled]="!canIncrease()"
+        >
+          {{ food().remaining === 0 ? 'ناموجود' : 'افزودن +' }}
+        </button>
+      }
     </div>
   </div>
 </article>
+
+<dialog
+  #addonDialog
+  class="food-addon-dialog"
+  (cancel)="selected.set([])"
+  (close)="selected.set([])"
+  aria-label="انتخاب افزودنی غذا"
+>
+  <div class="addon-dialog-header">
+    <div>
+      <span class="small text-muted">یه انتخاب خوشمزه‌تر</span>
+      <h2>افزودنی‌های {{ food().name }}</h2>
+    </div>
+    <button type="button" class="addon-close" (click)="close()" aria-label="بستن پنجره افزودنی‌ها">
+      ×
+    </button>
+  </div>
+  <div class="addon-dialog-body">
+    <p class="text-muted small">در صورت تمایل، تکمیل‌کننده‌های غذات رو انتخاب کن.</p>
+    @for (addon of addons(); track addon.id) {
+      <label class="addon-option" [class.unavailable]="addon.remaining === 0">
+        <input
+          type="checkbox"
+          class="form-check-input"
+          [checked]="selected().includes(addon.id)"
+          [disabled]="addon.remaining === 0"
+          (change)="toggle(addon.id)"
+        />
+        <span class="addon-name"
+          >{{ addon.name }}
+          @if (addon.remaining === 0) {
+            <small>ناموجود</small>
+          }
+        </span>
+        <span class="addon-price"
+          >{{ addon.discountPrice ?? addon.price | number }} <small>تومان</small></span
+        >
+      </label>
+    }
+  </div>
+  <div class="addon-dialog-footer">
+    <span class="addon-total">{{ total() | number }} <small>تومان</small></span>
+    <button type="button" class="btn btn-primary" (click)="confirm()">افزودن به سبد</button>
+  </div>
+</dialog>

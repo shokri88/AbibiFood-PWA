@@ -2,3 +2,165 @@
   display: block;
   height: 100%;
 }
+.food-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.card-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.food-card-price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px;
+  margin-top: auto;
+}
+.food-card-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid #eee4d7;
+}
+.food-details {
+  font-size: 11px;
+  color: #88715c;
+  text-decoration: none;
+}
+.food-details:hover {
+  color: #99252c;
+}
+.card-add {
+  min-height: 38px;
+  font-size: 12px;
+}
+.card-quantity {
+  display: flex;
+  align-items: center;
+  border: 1px solid #e5c9b3;
+  border-radius: 12px;
+  background: #fff8ef;
+  overflow: hidden;
+}
+.card-quantity button {
+  width: 36px;
+  min-height: 38px;
+  border: 0;
+  background: transparent;
+  color: #99252c;
+  font-size: 23px;
+  line-height: 1;
+}
+.card-quantity span {
+  min-width: 25px;
+  text-align: center;
+  font-size: 14px;
+}
+.card-quantity button:disabled {
+  opacity: 0.35;
+}
+.food-addon-dialog {
+  width: min(520px, calc(100% - 24px));
+  max-height: min(85dvh, 700px);
+  margin: auto;
+  padding: 0;
+  border: 1px solid #e8d8c8;
+  border-radius: 22px;
+  background: #fffcf7;
+  color: #382c25;
+  box-shadow: 0 24px 90px #32191140;
+  overscroll-behavior: contain;
+}
+.food-addon-dialog::backdrop {
+  background: #24191185;
+  backdrop-filter: blur(3px);
+}
+.addon-dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 20px;
+  border-bottom: 1px solid #eadfce;
+}
+.addon-dialog-header h2 {
+  font-size: 18px;
+  margin: 8px 0 0;
+}
+.addon-close {
+  width: 36px;
+  height: 36px;
+  border: 1px solid #eadfce;
+  border-radius: 50%;
+  background: white;
+  color: #7b5041;
+  font-size: 25px;
+  flex-shrink: 0;
+}
+.addon-dialog-body {
+  padding: 20px;
+}
+.addon-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 12px;
+  border: 1px solid #e8dccb;
+  background: white;
+  border-radius: 12px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.addon-option .form-check-input {
+  margin: 0;
+  flex-shrink: 0;
+}
+.addon-name {
+  flex: 1;
+  font-size: 14px;
+}
+.addon-name small {
+  display: block;
+  margin-top: 5px;
+  color: #996d59;
+}
+.addon-price {
+  font-size: 13px;
+  white-space: nowrap;
+}
+.addon-option.unavailable {
+  opacity: 0.55;
+  cursor: default;
+}
+.addon-dialog-footer {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 20px;
+  border-top: 1px solid #eadfce;
+  background: #fff8ed;
+}
+.addon-total {
+  font-size: 18px;
+}
+.addon-total small {
+  font-size: 11px;
+}
+@media (max-width: 575px) {
+  .card-quantity button {
+    width: 30px;
+  }
+  .addon-dialog-header h2 {
+    font-size: 16px;
+  }
+}

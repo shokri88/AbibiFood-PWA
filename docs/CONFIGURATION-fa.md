@@ -9,3 +9,9 @@
 `ngsw-config.json`: فقط assetGroups؛ هیچ API/توکن در cache تعریف نشده. `proxy.conf.json` فقط نمونه dev با secure=false برای گواهی localhost است؛ در production استفاده نشود.
 
 نسخه‌ها دقیق در package.json/package-lock.json و Node در .node-version. Angular/Bootstrap/runtime config عمومی‌اند و هیچ secret نباید در آن‌ها قرار گیرد. تنظیمات مدیریتی سامانه و secret پیامک/پرداخت متعلق به بک‌اند آینده‌اند.
+
+## فونت سبک‌تر و پاپ‌آپ کارت
+
+CSS فونت فرانت همچنان `public/assets/css/hasti.css` است. فایل‌های فعلی فقط Hasti Heavy هستند؛ برای درخواست وزن سبک‌تر باید فایل قانونی Regular/Medium در اختیار پروژه قرار گیرد و @font-face همان CSS تکمیل شود. از ثبت وزن صوری ۴۰۰ برای فایل Heavy به‌عنوان رفع مشکل خودداری کنید. وزن سبک‌تر هنوز اعمال نشده است؛ فونت بک‌اند وزیر باقی است.
+
+پاپ‌آپ افزودنی کتابخانه خارجی ندارد و از dialog بومی مرورگر استفاده می‌کند. در حالت API به menu.addons و غذاهای همان پاسخ وابسته است. در حالت template نمونه‌ها در TEMPLATE_DATA.addons قرار دارند.

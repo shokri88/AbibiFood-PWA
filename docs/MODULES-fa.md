@@ -24,3 +24,11 @@
 | template-reference/ORIGIN.json | provenance قالب                                                      |
 
 حد ۲۰ عدد در StoreService انتخاب نمایشی باقی‌مانده از قالب است، نه سیاست فروش تأییدشده. افزودنی فعلی در Angular برای هر ردیف صفر/یک انتخاب می‌شود؛ maxQuantity API برای توسعه تعداد در فاز فروش محفوظ است.
+
+## تعامل کارت و افزودنی
+
+- `shared/food-card/food-card.ts/html/css`: کارت مشترک با ورودی food و menu؛ computedهای quantity، addons، canIncrease و total؛ increase پنجره اولیه یا افزایش مستقیم را انتخاب می‌کند، confirm افزودنی‌های فعلی مجاز را ثبت می‌کند، close لغو و decrease آخرین ردیف را کم می‌کند. dialog از API بومی showModal/close استفاده می‌کند؛ وابستگی جدیدی اضافه نشده است.
+- `core/store.service.ts`: foodQuantity مجموع غذا در تمام ترکیب‌ها؛ latestLineIndex آخرین ردیف همان غذا؛ increaseFood همان addonIds را تکرار و decreaseFood از همان ردیف کم می‌کند. sessionStorage قبلی و ساختار CartLine حفظ شدند.
+- Home و Menu منوی جاری را به کارت می‌دهند؛ Product لینک برگشت به منو و عنوان نقش «اطلاعات تکمیلی» دارد؛ رفتار انتخاب ترکیب از صفحه محصول همچنان موجود است.
+- `core/template-data.ts` رابطه افزودنی نمونه را نگه می‌دارد و CatalogService تنها در mode=template آن را برمی‌گرداند. روابط واقعی از API هستند.
+- `food-card.spec.ts` اولین افزودن/تأیید/لغو، انتخاب اختیاری، افزودنی ناموجود، صفرشدن و انتخاب دوباره، مسیر اطلاعات و تغییر شعبه را با JSDOM بررسی می‌کند.

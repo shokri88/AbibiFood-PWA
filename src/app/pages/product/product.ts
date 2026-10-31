@@ -9,7 +9,7 @@ import { Branch, Menu, Food } from '../../core/models';
 import { FoodCard } from '../../shared/food-card/food-card';
 @Component({
   selector: 'app-product-page',
-  imports: [DecimalPipe],
+  imports: [DecimalPipe, RouterLink],
   templateUrl: './product.html',
   styleUrl: './product.css',
 })

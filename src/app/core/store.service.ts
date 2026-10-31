@@ -36,6 +36,27 @@ export class StoreService {
     );
     this.save();
   }
+  foodQuantity(foodId: number): number {
+    return this.cart()
+      .filter((line) => line.foodId === foodId)
+      .reduce((sum, line) => sum + line.quantity, 0);
+  }
+  // کارت، آخرین ترکیب همان غذا را افزایش/کاهش می‌دهد؛ ترکیب‌های دیگر سبد دست‌نخورده‌اند.
+  latestLineIndex(foodId: number): number {
+    const lines = this.cart();
+    for (let index = lines.length - 1; index >= 0; index--) {
+      if (lines[index].foodId === foodId) return index;
+    }
+    return -1;
+  }
+  increaseFood(foodId: number): void {
+    const index = this.latestLineIndex(foodId);
+    this.add(foodId, index < 0 ? [] : this.cart()[index].addonIds);
+  }
+  decreaseFood(foodId: number): void {
+    const index = this.latestLineIndex(foodId);
+    if (index >= 0) this.quantity(index, -1);
+  }
   private save(): void {
     try {
       sessionStorage.setItem('abibi.branch', JSON.stringify(this.branch()));

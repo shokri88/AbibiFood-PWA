@@ -1,4 +1,9 @@
 export const TEMPLATE_DATA = {
+  // فقط نمونه قالب: همان غذای مخزن می‌تواند تکمیل‌کننده غذای دیگر هم باشد.
+  addons: [
+    { id: 1, parentBranchFoodId: 1, addonBranchFoodId: 3, maxQuantity: 1 },
+    { id: 2, parentBranchFoodId: 2, addonBranchFoodId: 3, maxQuantity: 1 },
+  ],
   products: [
     {
       id: 1,
