@@ -16,14 +16,14 @@
           ><button (click)="store.quantity($index, -1)" aria-label="کاهش">−</button>
         </div>
       </div>
-      <strong>{{ lineTotal(line.foodId, line.addonIds, line.quantity) | number }} تومان</strong>
+      <strong>{{ lineTotal(line.foodId, line.addonIds, line.quantity) | number: '1.0-0' }} تومان</strong>
     </div>
   } @empty {
     <p>سبدت هنوز خالیه.</p>
     <a routerLink="/menu">مشاهده منو ←</a>
   }
   <div class="summary-line total">
-    <strong>جمع</strong><strong>{{ total() | number }} تومان</strong>
+    <strong>جمع</strong><strong>{{ total() | number: '1.0-0' }} تومان</strong>
   </div>
   <p class="notice">{{ settings.text('noOrder') }}</p>
 </section>

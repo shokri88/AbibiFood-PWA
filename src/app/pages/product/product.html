@@ -25,12 +25,12 @@
               type="checkbox"
               [checked]="selected().includes(a.id)"
               (change)="toggle(a.id)"
-            /><span>{{ a.name }} · {{ a.discountPrice ?? a.price | number }} تومان</span></label
+            /><span>{{ a.name }} · {{ a.discountPrice ?? a.price | number: '1.0-0' }} تومان</span></label
           >
         } @empty {
           <p class="small text-muted">افزودنی تعریف نشده است.</p>
         }
-        <strong class="price d-block my-4">{{ total() | number }} تومان</strong
+        <strong class="price d-block my-4">{{ total() | number: '1.0-0' }} تومان</strong
         ><button class="btn btn-primary" (click)="add()" [disabled]="!f.standalone">
           افزودن به سبد نمایشی
         </button>

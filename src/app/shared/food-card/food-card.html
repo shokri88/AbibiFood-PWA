@@ -9,10 +9,10 @@
     <p>{{ food().description }}</p>
     <div class="food-card-price">
       @if (food().discountPrice != null) {
-        <del class="text-muted small">{{ food().price | number }}</del>
+        <del class="text-muted small">{{ food().price | number: '1.0-0' }}</del>
       }
       <strong class="price"
-        >{{ food().discountPrice ?? food().price | number }} <small>تومان</small></strong
+        >{{ food().discountPrice ?? food().price | number: '1.0-0' }} <small>تومان</small></strong
       >
     </div>
     <div class="food-card-actions">
@@ -84,13 +84,13 @@
           }
         </span>
         <span class="addon-price"
-          >{{ addon.discountPrice ?? addon.price | number }} <small>تومان</small></span
+          >{{ addon.discountPrice ?? addon.price | number: '1.0-0' }} <small>تومان</small></span
         >
       </label>
     }
   </div>
   <div class="addon-dialog-footer">
-    <span class="addon-total">{{ total() | number }} <small>تومان</small></span>
+    <span class="addon-total">{{ total() | number: '1.0-0' }} <small>تومان</small></span>
     <button type="button" class="btn btn-primary" (click)="confirm()">افزودن به سبد</button>
   </div>
 </dialog>
