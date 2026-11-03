@@ -30,7 +30,15 @@ export class HomePage {
       return;
     }
     try {
-      this.menu.set(await this.api.menu(b.id));
+      const menu = await this.api.menu(b.id);
+      const pool = menu.foods.filter(f => f.standalone);
+      // فقط هنگام دریافت داده تصادفی شود؛ انتخاب‌ها با هر رندر تغییر نکنند.
+      for (let i = pool.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [pool[i], pool[j]] = [pool[j], pool[i]];
+      }
+      this.suggestions.set(pool.slice(0, 4));
+      this.menu.set(menu);
       this.error.set('');
     } catch {
       this.error.set(this.settings.text('apiError'));
@@ -42,6 +50,8 @@ export class HomePage {
   hasOffers() {
     return this.standalone().some((f) => f.discountPrice != null);
   }
+  suggestions = signal<Food[]>([]);
+  featuredFoods() { const ranked = this.bestSellers(); return ranked.length ? ranked : this.suggestions(); }
   bestSellers() {
     return (this.menu().bestSellerIds ?? []).map(id => this.standalone().find(f => f.id === id)).filter((food): food is Food => !!food);
   }

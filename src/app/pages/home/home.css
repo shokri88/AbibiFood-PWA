@@ -1,13 +1,13 @@
 .hero-inner {
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) var(--food-image-size);
   gap: 20px;
 }
 .hero-copy { width: auto; }
 .hero-image {
   position: static;
-  width: 100%;
-  max-width: 325px;
+  width: var(--food-image-size);
+  max-width: 100%;
   border: 0;
   border-radius: 12px;
   transform: none;

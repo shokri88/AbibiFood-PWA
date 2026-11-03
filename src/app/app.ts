@@ -16,7 +16,7 @@ export class App {
     filter((event): event is NavigationEnd => event instanceof NavigationEnd),
     map(event => event.urlAfterRedirects), startWith(this.router.url),
   ), { initialValue: '/' });
-  isSplash = computed(() => this.currentUrl().split(/[?#]/)[0] === '/');
+  isEntryPage = computed(() => ['/', '/branches'].includes(this.currentUrl().split(/[?#]/)[0]));
   store = inject(StoreService);
   settings = inject(SettingsService);
   online = signal(navigator.onLine);

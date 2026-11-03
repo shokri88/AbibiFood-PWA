@@ -9,7 +9,7 @@ class TestPage {}
 describe('قاب صفحه آغاز', () => {
   it('در ریشه هدر و منوی پایین و فاصله را حذف و پس از خروج بازمی‌گرداند', async () => {
     TestBed.configureTestingModule({imports: [App], providers: [provideRouter([
-      {path: '', component: TestPage, pathMatch: 'full'}, {path: 'home', component: TestPage},
+      {path: '', component: TestPage, pathMatch: 'full'}, {path: 'home', component: TestPage}, {path: 'branches', component: TestPage},
     ])]});
     const fixture = TestBed.createComponent(App);
     const router = TestBed.inject(Router);
@@ -19,7 +19,12 @@ describe('قاب صفحه آغاز', () => {
     expect(fixture.nativeElement.querySelector('.offline-banner')).toBeNull();
     expect(fixture.nativeElement.querySelector('.site-header')).toBeNull();
     expect(fixture.nativeElement.querySelector('.bottom-nav')).toBeNull();
-    expect(fixture.nativeElement.querySelector('main').className).toBe('splash-content');
+    expect(fixture.nativeElement.querySelector('main').className).toBe('entry-content');
+    await router.navigateByUrl('/branches?return=menu');
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('.site-header')).toBeNull();
+    expect(fixture.nativeElement.querySelector('.bottom-nav')).toBeNull();
+    expect(fixture.nativeElement.querySelector('main').className).toBe('entry-content');
     await router.navigateByUrl('/home');
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelector('.offline-banner')).not.toBeNull();

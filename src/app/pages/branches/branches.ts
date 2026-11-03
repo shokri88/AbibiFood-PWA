@@ -9,7 +9,7 @@ import { Branch, Menu, Food } from '../../core/models';
 import { FoodCard } from '../../shared/food-card/food-card';
 @Component({
   selector: 'app-branches-page',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './branches.html',
   styleUrl: './branches.css',
 })
@@ -19,15 +19,18 @@ export class BranchesPage {
   router = inject(Router);
   branches = signal<Branch[]>([]);
   error = signal('');
+  loading = signal(false);
   constructor() {
     this.load();
   }
   async load() {
+    this.loading.set(true);
+    this.error.set('');
     try {
       this.branches.set(await this.api.branches());
     } catch {
       this.error.set('دریافت شعبه‌ها ممکن نشد.');
-    }
+    } finally { this.loading.set(false); }
   }
   select(b: Branch) {
     if (

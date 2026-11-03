@@ -1,0 +1,5 @@
+:host { display: block; }
+.branch-brand .brand span { display: flex; flex-direction: column; align-items: center; }
+.branch-choice { min-height: 96px; }
+.branch-choice .flex-grow-1 { min-width: 0; overflow-wrap: anywhere; }
+.branch-choice .branch-symbol { display: grid; place-items: center; width: 64px; height: 64px; flex-shrink: 0; }

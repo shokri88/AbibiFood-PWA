@@ -4,7 +4,7 @@
 
 **شروع انتقال به انسان یا AI جدید:** [AI-HANDOVER-fa.md](docs/AI-HANDOVER-fa.md) و [AGENTS.md](AGENTS.md).
 
-Angular 21.2.25، TypeScript، Bootstrap RTL، فونت Hasti و PWA؛ هشت Route اولیه. مرجع کامل ۲۰ صفحه HTML در template-reference محفوظ است. این نسخه فروش و احراز هویت مشتری ندارد؛ پیش‌فرض با داده نمونه اجرا می‌شود.
+Angular 21.2.25، TypeScript، Bootstrap RTL، فونت Hasti و PWA؛ هشت Route اولیه. مرجع کامل ۲۰ صفحه HTML در template-reference محفوظ است. این نسخه فروش و احراز هویت مشتری ندارد؛ پیش‌فرض از API در https://localhost:7043 می‌خواند.
 
 ```sh
 npm ci
@@ -33,4 +33,4 @@ npm run build
 
 ## وضعیت اعتبارسنجی
 
-Build production و ۵ تست StoreService موفق. بررسی بصری/نصب واقعی PWA و اتصال end-to-end هنوز انجام نشده.
+Build production و ۱۸ تست موفق؛ چیدمان شعبه، قاب تصاویر و پیشنهاد جایگزین در مرورگر نیز بررسی شده‌اند. بررسی بصری/نصب واقعی PWA و اتصال end-to-end هنوز انجام نشده.

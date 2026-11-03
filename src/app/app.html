@@ -1,7 +1,7 @@
-@if (!online() && !isSplash()) {
+@if (!online() && !isEntryPage()) {
   <div class="offline-banner" role="status">{{ settings.text('offline') }}</div>
 }
-@if (!isSplash()) {
+@if (!isEntryPage()) {
 <header class="site-header">
   <div class="container-xxl d-flex align-items-center gap-3 py-3">
     <a routerLink="/home" class="brand"
@@ -26,8 +26,8 @@
   }
 </header>
 }
-<main [class]="isSplash() ? 'splash-content' : 'container-xxl main-content route-content'"><router-outlet /></main>
-@if (!isSplash()) {
+<main [class]="isEntryPage() ? 'entry-content' : 'container-xxl main-content route-content'"><router-outlet /></main>
+@if (!isEntryPage()) {
 <nav class="bottom-nav d-lg-none" aria-label="ناوبری موبایل">
   <a routerLink="/home" routerLinkActive="active"><span><i class="fa-solid fa-house" aria-hidden="true"></i></span><small>خانه</small></a
   ><a routerLink="/menu" routerLinkActive="active"><span><i class="fa-solid fa-utensils" aria-hidden="true"></i></span><small>منو</small></a

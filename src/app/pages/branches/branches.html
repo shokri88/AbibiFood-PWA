@@ -1,16 +1,38 @@
-<section class="branch-content">
-  <span class="eyebrow">WELCOME TO ABIBI</span>
-  <h1>از کدوم شعبه سفارش می‌دی؟</h1>
-  @if (error()) {
-    <p class="app-error">{{ error() }} <button (click)="load()">تلاش دوباره</button></p>
-  }
-  @for (b of branches(); track b.id) {
-    <button class="branch-choice" (click)="select(b)">
-      <span class="branch-symbol"><i class="fa-solid fa-store" aria-hidden="true"></i></span
-      ><span
-        ><strong>{{ b.name }}</strong
-        ><small>{{ b.address || b.area }}</small></span
-      >
-    </button>
-  }
-</section>
+<div class="row g-0 branch-screen">
+  <div class="col-lg-5 branch-brand">
+    <a routerLink="/" class="brand" aria-label="بازگشت به صفحه آغاز">
+      <img src="assets/image/logo.webp" alt="لوگوی آبی‌بی" />
+      <span><img src="assets/image/Abibi-logotype.webp" class="logotype" alt="آبی‌بی" /><small>ABIBI FOOD</small></span>
+    </a>
+    <h1>یه دل سیر خاطره.</h1>
+    <p>طعم آشنای آبی‌بی، هر جا که تویی.</p>
+  </div>
+  <div class="col-lg-7 d-flex align-items-center">
+    <section class="branch-content" aria-labelledby="branch-heading">
+      <span class="eyebrow">قربون قدمت، خوش اومدی.</span>
+      <h2 id="branch-heading">از کدوم شعبه سفارش می‌دی؟</h2>
+      <p class="text-muted mb-4">شعبه‌ات رو انتخاب کن تا بریم سراغ خوشمزه‌ها.</p>
+      @if (error()) {
+        <p class="app-error" role="alert">{{ error() }} <button type="button" class="btn btn-outline-primary btn-sm" (click)="load()">تلاش دوباره</button></p>
+      } @else if (loading()) {
+        <p role="status">در حال دریافت شعبه‌ها…</p>
+      } @else {
+        <div id="branches-list">
+          @for (b of branches(); track b.id) {
+            <button type="button" class="branch-choice" (click)="select(b)">
+              <span class="branch-symbol"><i class="fa-solid fa-store" aria-hidden="true"></i></span>
+              <span class="flex-grow-1">
+                <strong>{{ b.name }}</strong>
+                @if (b.description) {<small>{{ b.description }}</small>}
+                <small><i class="fa-solid fa-location-dot" aria-hidden="true"></i> {{ b.address || b.area }}</small>
+              </span>
+              <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+            </button>
+          } @empty {
+            <p class="text-muted" role="status">در حال حاضر شعبه فعالی موجود نیست.</p>
+          }
+        </div>
+      }
+    </section>
+  </div>
+</div>

@@ -51,10 +51,10 @@
     </div>
   </section>
 }
-@if (bestSellers().length) {
-<div class="section-heading"><h2>پرفروش‌ترین‌ها</h2></div>
+@if (featuredFoods().length) {
+<div class="section-heading"><h2>{{ bestSellers().length ? 'پرفروش‌ترین‌ها' : 'انتخاب‌های پیشنهادی' }}</h2></div>
 <div class="row g-3">
-  @for (f of bestSellers().slice(0, 4); track f.id) {
+  @for (f of featuredFoods().slice(0, 4); track f.id) {
     <div class="col-6 col-lg-3"><app-food-card [food]="f" [menu]="menu()" /></div>
   }
 </div>
