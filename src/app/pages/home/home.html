@@ -2,24 +2,34 @@
   <h1 class="h5">امروز چی میل داری؟</h1>
   <a routerLink="/menu" class="btn btn-outline-primary btn-sm">منوی کامل <i class="fa-solid fa-arrow-left" aria-hidden="true"></i></a>
 </div>
-@if (heroFood(); as heroFood) {
-<section class="hero">
-  <div class="hero-inner">
-    <div class="hero-copy">
-      <span>خوشمزه‌های آبی‌بی</span>
-      <h1>
-        {{ ['یه گاز خوشمزه،', 'همه دور هم،', 'صبح بخیر،'][slide()]
-        }}<em>{{ ['یه عالمه خاطره!', 'پیتزا وسط!', 'با طعم آبی‌بی.'][slide()] }}</em>
-      </h1>
-      <a routerLink="/menu" class="btn btn-cream">انتخاب غذا <i class="fa-solid fa-arrow-left" aria-hidden="true"></i></a
-      ><button class="btn btn-outline-light ms-2" (click)="next()" aria-label="بنر بعدی"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
+@if (banners().length) {
+<section class="carousel slide hero" aria-label="پیشنهادهای آبی‌بی" aria-roledescription="اسلایدر">
+  @if (banners().length > 1) {
+    <div class="carousel-indicators">
+      @for (banner of banners(); track banner.id; let i = $index) {
+        <button type="button" [class.active]="slide() === i" [attr.aria-label]="'بنر ' + (i + 1)" [attr.aria-current]="slide() === i ? 'true' : null" (click)="slide.set(i)"></button>
+      }
     </div>
-    <img
-      class="hero-image"
-      [src]="heroFood.image"
-      [alt]="heroFood.name"
-    />
+  }
+  <div class="carousel-inner">
+    @for (banner of banners(); track banner.id; let i = $index) {
+      <div class="carousel-item" [class.active]="slide() === i">
+        <div class="hero-inner">
+          <div class="hero-copy">
+            <h1>{{ banner.title }}</h1>
+            <p>{{ banner.text }}</p>
+            <a [routerLink]="['/food', banner.branchFoodId]" class="btn btn-cream">مشاهده غذا <i class="fa-solid fa-arrow-left" aria-hidden="true"></i></a>
+          </div>
+          <a [routerLink]="['/food', banner.branchFoodId]" [attr.aria-label]="'مشاهده غذای بنر ' + banner.title"><img [src]="banner.image" [alt]="banner.title" class="hero-image banner-image" /></a>
+        </div>
+      </div>
+    }
   </div>
+  @if (banners().length > 1) {
+    <button class="carousel-control-prev" type="button" (click)="previous()" aria-label="بنر قبلی"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+    <button class="carousel-control-next" type="button" (click)="next()" aria-label="بنر بعدی"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+    <button class="carousel-pause" type="button" (click)="paused.set(!paused())" [attr.aria-label]="paused() ? 'پخش اسلایدر' : 'توقف اسلایدر'"><i class="fa-solid" [class.fa-play]="paused()" [class.fa-pause]="!paused()" aria-hidden="true"></i></button>
+  }
 </section>
 }
 <div class="categories">
@@ -30,15 +40,17 @@
 @if (error()) {
   <p class="app-error">{{ error() }} <button (click)="load()">تلاش دوباره</button></p>
 }
+@if (specials().length) {
 <div class="section-heading">
-  <h2>پیشنهاد ویژه</h2>
+  <div><h2>پیشنهاد ویژه</h2><p>چند انتخاب خوشمزه برای امروزت</p></div>
   <a routerLink="/menu">همه غذاها <i class="fa-solid fa-arrow-left" aria-hidden="true"></i></a>
 </div>
 <div class="row g-3">
-  @for (f of standalone().slice(0, 4); track f.id) {
+  @for (f of specials(); track f.id) {
     <div class="col-6 col-lg-3"><app-food-card [food]="f" [menu]="menu()" /></div>
   }
 </div>
+}
 @if (hasOffers()) {
   <section class="deals-section">
     <div class="deals-heading"><h2>آف‌خورده‌های آبی‌بی <i class="fa-solid fa-tags" aria-hidden="true"></i></h2></div>

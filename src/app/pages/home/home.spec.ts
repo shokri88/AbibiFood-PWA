@@ -41,4 +41,27 @@ describe('پیشنهاد جایگزین پرفروش‌ها', () => {
     const fixture = await setup({ foods: [], groups: [], addons: [] });
     expect(fixture.componentInstance.featuredFoods()).toEqual([]);
   });
+  it('پیشنهاد ویژه فقط از انتخاب سرور می‌آید و بنر متن و تصویر مستقل دارد', async () => {
+    const fixture = await setup({ foods, groups: [], addons: [], specialFoodIds: [5, 2], banners: [
+      { id: 1, branchFoodId: 2, title: 'عنوان اختصاصی', text: '<b>متن کاربر</b>', image: '/banner-custom.png' },
+      { id: 2, branchFoodId: 5, title: 'بنر دوم', text: 'متن دوم', image: '/second.png' },
+    ] });
+    const page = fixture.componentInstance;
+    expect(page.specials().map(f => f.id)).toEqual([5, 2]);
+    const active = fixture.nativeElement.querySelector('.carousel-item.active');
+    expect(active.querySelector('h1').textContent).toBe('عنوان اختصاصی');
+    expect(active.querySelector('p').textContent).toBe('<b>متن کاربر</b>');
+    expect(active.querySelector('p b')).toBeNull();
+    expect(active.querySelector('img').getAttribute('src')).toBe('/banner-custom.png');
+    expect(active.querySelector('a').getAttribute('href')).toBe('/food/2');
+    page.next(); fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('.carousel-item.active h1').textContent).toBe('بنر دوم');
+    page.next(); expect(page.slide()).toBe(0); page.previous(); expect(page.slide()).toBe(1);
+  });
+  it('بدون تنظیم پیشنهاد و بنر، از غذاهای اول منو چیزی تولید نمی‌کند', async () => {
+    const fixture = await setup({ foods, groups: [], addons: [] });
+    expect(fixture.componentInstance.specials()).toEqual([]);
+    expect(fixture.nativeElement.querySelector('.hero')).toBeNull();
+  });
+
 });

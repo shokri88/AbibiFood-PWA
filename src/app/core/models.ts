@@ -29,11 +29,20 @@ export interface Addon {
   addonBranchFoodId: number;
   maxQuantity: number;
 }
+export interface HomeBanner {
+  id: number;
+  branchFoodId: number;
+  title: string;
+  text: string;
+  image: string;
+}
 export interface Menu {
   foods: Food[];
   groups: Group[];
   addons: Addon[];
   bestSellerIds?: number[];
+  specialFoodIds?: number[];
+  banners?: HomeBanner[];
 }
 export interface CartLine {
   foodId: number;

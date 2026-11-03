@@ -19,6 +19,8 @@ interface ApiMenu {
   }[];
   groups: { id: number; title: string; imagePath?: string }[];
   bestSellerIds?: number[];
+  specialFoodIds?: number[];
+  banners?: { id: number; branchFoodId: number; title: string; text: string; imagePath: string }[];
   memberships: { branchGroupId: number; branchFoodId: number }[];
   addons: Menu['addons'];
 }
@@ -59,6 +61,8 @@ export class CatalogService {
     return {
       groups: data.groups.map(g => ({ id: g.id, title: g.title, image: g.imagePath ? this.url(g.imagePath) : undefined })),
       bestSellerIds: data.bestSellerIds ?? [],
+      specialFoodIds: data.specialFoodIds ?? [],
+      banners: (data.banners ?? []).map(b => ({ id: b.id, branchFoodId: b.branchFoodId, title: b.title, text: b.text, image: this.url(b.imagePath) })),
       addons: data.addons,
       foods: data.foods.map((p) => ({
         id: p.id,

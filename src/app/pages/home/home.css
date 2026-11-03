@@ -1,18 +1,40 @@
-.hero-inner {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) var(--food-image-size);
-  gap: 20px;
+/* هندسه بنر مطابق قالب اصلی است؛ تصویر تبلیغ، مستقل از قاب عکس غذاست. */
+.hero-inner { display: flex; }
+.hero-copy { width: 55%; overflow-wrap: anywhere; }
+.hero-copy p { white-space: pre-line; }
+.banner-image {
+  position: absolute;
+  width: 325px;
+  height: 325px;
+  max-width: none;
+  border-radius: 50%;
+  background: #fff;
+  left: 8%;
+  border: 8px solid #c06e5255;
+  top: 50%;
+  transform: translateY(-50%) rotate(-6deg);
+  object-fit: contain;
+  margin: 0;
 }
-.hero-copy { width: auto; }
-.hero-image {
-  position: static;
-  width: var(--food-image-size);
-  max-width: 100%;
-  border: 0;
-  border-radius: 12px;
-  transform: none;
-  justify-self: center;
+@media (max-width: 991.98px) {
+  .banner-image { width: 260px; height: 260px; left: 5%; }
 }
 @media (max-width: 575.98px) {
-  .hero-inner { gap: 12px; }
+  .hero-copy { width: 65%; }
+  .banner-image { width: 170px; height: 170px; left: -30px; top: 35px; transform: rotate(-6deg); border-width: 4px; }
 }
+.carousel-indicators button {
+  box-sizing: content-box;
+  flex: 0 1 auto;
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  margin: 0 4px;
+  border: 0;
+  border-radius: 30px;
+  background: #fff;
+  opacity: .5;
+  transition: opacity .6s ease;
+}
+.carousel-indicators button.active { width: 25px; opacity: 1; }
+.carousel-indicators button:focus-visible { outline: 2px solid var(--cream); outline-offset: 4px; }

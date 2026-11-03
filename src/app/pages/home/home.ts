@@ -1,4 +1,4 @@
-import { Component, inject, signal, computed } from '@angular/core';
+import { Component, DestroyRef, inject, signal, computed } from '@angular/core';
 import { RouterLink, Router, ActivatedRoute } from '@angular/router';
 import { DecimalPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -22,6 +22,11 @@ export class HomePage {
   error = signal('');
   constructor() {
     this.load();
+    const reducedMotion = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion:reduce)').matches;
+    if (!reducedMotion) {
+      const timer = setInterval(() => { if (!this.paused() && !document.hidden) this.next(); }, 6000);
+      inject(DestroyRef).onDestroy(() => clearInterval(timer));
+    }
   }
   async load() {
     const b = this.store.branch();
@@ -38,6 +43,7 @@ export class HomePage {
         [pool[i], pool[j]] = [pool[j], pool[i]];
       }
       this.suggestions.set(pool.slice(0, 4));
+      this.slide.set(0);
       this.menu.set(menu);
       this.error.set('');
     } catch {
@@ -55,9 +61,12 @@ export class HomePage {
   bestSellers() {
     return (this.menu().bestSellerIds ?? []).map(id => this.standalone().find(f => f.id === id)).filter((food): food is Food => !!food);
   }
-  heroFood() { return this.standalone()[this.slide()]; }
-  slide = signal(0);
-  next() {
-    this.slide.update((n) => (n + 1) % Math.max(1, Math.min(3, this.standalone().length)));
+  specials() {
+    return (this.menu().specialFoodIds ?? []).map(id => this.standalone().find(f => f.id === id)).filter((food): food is Food => !!food);
   }
+  banners() { return this.menu().banners ?? []; }
+  slide = signal(0);
+  paused = signal(false);
+  next() { this.slide.update(n => (n + 1) % Math.max(1, this.banners().length)); }
+  previous() { this.slide.update(n => (n - 1 + this.banners().length) % Math.max(1, this.banners().length)); }
 }
