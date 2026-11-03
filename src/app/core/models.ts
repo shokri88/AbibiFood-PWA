@@ -13,6 +13,7 @@ export interface Food {
   price: number;
   discountPrice?: number | null;
   image: string;
+  images?: string[];
   groupIds: number[];
   remaining?: number;
   standalone: boolean;

@@ -70,6 +70,7 @@ export class CatalogService {
         groupIds: data.memberships
           .filter((m) => m.branchFoodId === p.id)
           .map((m) => m.branchGroupId),
+        images: p.images.map((path) => this.settings.config().apiBaseUrl.replace(/\/$/, '') + path),
         image: p.images.length
           ? this.settings.config().apiBaseUrl.replace(/\/$/, '') + p.images[0]
           : 'assets/image/logo.webp',
