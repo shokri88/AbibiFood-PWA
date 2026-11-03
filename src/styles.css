@@ -92,3 +92,23 @@ app-splash-page { display: block; }
 }
 .category img { width: 64px; height: 64px; flex-shrink: 0; }
 .cart-item img { width: 72px; height: 72px; flex-shrink: 0; }
+
+/* کارت یک‌اندازه و مربع برای گروه‌ها در خانه و منو. */
+.categories { --category-size: 112px; }
+.categories .category {
+  flex: 0 0 var(--category-size);
+  width: var(--category-size);
+  min-width: var(--category-size);
+  max-width: var(--category-size);
+  height: var(--category-size);
+  aspect-ratio: 1;
+  flex-direction: column;
+  padding: 8px;
+  gap: 6px;
+  white-space: normal;
+  text-align: center;
+}
+.categories .category img { width: 48px; height: 48px; object-fit: contain; border-radius: 0; }
+.categories .category > .fa-solid { width: 48px; height: 48px; display: grid; place-items: center; font-size: 28px; }
+.categories .category span { font-size: 11px; line-height: 16px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+@media (max-width: 575.98px) { .categories { --category-size: 104px; } }

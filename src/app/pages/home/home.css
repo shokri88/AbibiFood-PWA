@@ -1,7 +1,8 @@
 /* هندسه بنر مطابق قالب اصلی است؛ تصویر تبلیغ، مستقل از قاب عکس غذاست. */
 .hero-inner { display: flex; }
 .hero-copy { width: 55%; overflow-wrap: anywhere; }
-.hero-copy p { white-space: pre-line; }
+.hero-copy h1 { white-space: pre-line; }
+.hero-copy p { white-space: normal; }
 .banner-image {
   position: absolute;
   width: 325px;

@@ -34,7 +34,7 @@
 }
 <div class="categories">
   @for (g of menu().groups; track g.id) {
-    <a routerLink="/menu" [queryParams]="{ group: g.id }" class="category">@if (g.image) {<img [src]="g.image" alt="" loading="lazy" />}<span>{{ g.title }}</span></a>
+    <a routerLink="/menu" [queryParams]="{ group: g.id }" class="category">@if (g.image) {<img [src]="g.image" alt="" loading="lazy" />} @else {<i class="fa-solid fa-utensils" aria-hidden="true"></i>}<span>{{ g.title }}</span></a>
   }
 </div>
 @if (error()) {
