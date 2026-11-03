@@ -1,7 +1,8 @@
 <div class="d-flex justify-content-between align-items-center mb-4">
   <h1 class="h5">امروز چی میل داری؟</h1>
-  <a routerLink="/menu" class="btn btn-outline-primary btn-sm">منوی کامل ←</a>
+  <a routerLink="/menu" class="btn btn-outline-primary btn-sm">منوی کامل <i class="fa-solid fa-arrow-left" aria-hidden="true"></i></a>
 </div>
+@if (heroFood(); as heroFood) {
 <section class="hero">
   <div class="hero-inner">
     <div class="hero-copy">
@@ -10,19 +11,20 @@
         {{ ['یه گاز خوشمزه،', 'همه دور هم،', 'صبح بخیر،'][slide()]
         }}<em>{{ ['یه عالمه خاطره!', 'پیتزا وسط!', 'با طعم آبی‌بی.'][slide()] }}</em>
       </h1>
-      <a routerLink="/menu" class="btn btn-cream">انتخاب غذا ←</a
-      ><button class="btn btn-outline-light ms-2" (click)="next()" aria-label="بنر بعدی">←</button>
+      <a routerLink="/menu" class="btn btn-cream">انتخاب غذا <i class="fa-solid fa-arrow-left" aria-hidden="true"></i></a
+      ><button class="btn btn-outline-light ms-2" (click)="next()" aria-label="بنر بعدی"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
     </div>
     <img
       class="hero-image"
-      [src]="'assets/image/' + ['burger.jpg', 'pizza.jpg', 'breakfast.jpg'][slide()]"
-      alt="پیشنهاد آبی‌بی"
+      [src]="heroFood.image"
+      [alt]="heroFood.name"
     />
   </div>
 </section>
+}
 <div class="categories">
   @for (g of menu().groups; track g.id) {
-    <a routerLink="/menu" [queryParams]="{ group: g.id }" class="category">{{ g.title }}</a>
+    <a routerLink="/menu" [queryParams]="{ group: g.id }" class="category">@if (g.image) {<img [src]="g.image" alt="" loading="lazy" />}<span>{{ g.title }}</span></a>
   }
 </div>
 @if (error()) {
@@ -30,7 +32,7 @@
 }
 <div class="section-heading">
   <h2>پیشنهاد ویژه</h2>
-  <a routerLink="/menu">همه غذاها ←</a>
+  <a routerLink="/menu">همه غذاها <i class="fa-solid fa-arrow-left" aria-hidden="true"></i></a>
 </div>
 <div class="row g-3">
   @for (f of standalone().slice(0, 4); track f.id) {
@@ -39,7 +41,7 @@
 </div>
 @if (hasOffers()) {
   <section class="deals-section">
-    <div class="deals-heading"><h2>آف‌خورده‌های آبی‌بی ✦</h2></div>
+    <div class="deals-heading"><h2>آف‌خورده‌های آبی‌بی <i class="fa-solid fa-tags" aria-hidden="true"></i></h2></div>
     <div class="deal-track">
       @for (f of standalone(); track f.id) {
         @if (f.discountPrice != null) {
@@ -49,12 +51,11 @@
     </div>
   </section>
 }
-<div class="section-heading">
-  <h2>پرفروش‌ترین‌ها</h2>
-  <small class="text-muted">چیدمان قالب؛ آمار فروش هنوز متصل نیست</small>
-</div>
+@if (bestSellers().length) {
+<div class="section-heading"><h2>پرفروش‌ترین‌ها</h2></div>
 <div class="row g-3">
-  @for (f of standalone().slice(4, 8); track f.id) {
+  @for (f of bestSellers().slice(0, 4); track f.id) {
     <div class="col-6 col-lg-3"><app-food-card [food]="f" [menu]="menu()" /></div>
   }
 </div>
+}

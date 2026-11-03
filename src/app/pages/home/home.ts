@@ -42,8 +42,12 @@ export class HomePage {
   hasOffers() {
     return this.standalone().some((f) => f.discountPrice != null);
   }
+  bestSellers() {
+    return (this.menu().bestSellerIds ?? []).map(id => this.standalone().find(f => f.id === id)).filter((food): food is Food => !!food);
+  }
+  heroFood() { return this.standalone()[this.slide()]; }
   slide = signal(0);
   next() {
-    this.slide.update((n) => (n + 1) % 3);
+    this.slide.update((n) => (n + 1) % Math.max(1, Math.min(3, this.standalone().length)));
   }
 }

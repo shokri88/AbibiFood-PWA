@@ -29,11 +29,11 @@
             [disabled]="!canIncrease()"
             [attr.aria-label]="'افزایش ' + food().name"
           >
-            +
+            <i class="fa-solid fa-plus" aria-hidden="true"></i>
           </button>
           <span aria-live="polite">{{ quantity() | number }}</span>
           <button type="button" (click)="decrease()" [attr.aria-label]="'کاهش ' + food().name">
-            −
+            <i class="fa-solid fa-minus" aria-hidden="true"></i>
           </button>
         </div>
       } @else {
@@ -43,7 +43,7 @@
           (click)="increase()"
           [disabled]="!canIncrease()"
         >
-          {{ food().remaining === 0 ? 'ناموجود' : 'افزودن +' }}
+          @if (food().remaining === 0) { ناموجود } @else { افزودن <i class="fa-solid fa-plus" aria-hidden="true"></i> }
         </button>
       }
     </div>
@@ -63,7 +63,7 @@
       <h2>افزودنی‌های {{ food().name }}</h2>
     </div>
     <button type="button" class="addon-close" (click)="close()" aria-label="بستن پنجره افزودنی‌ها">
-      ×
+      <i class="fa-solid fa-xmark" aria-hidden="true"></i>
     </button>
   </div>
   <div class="addon-dialog-body">
