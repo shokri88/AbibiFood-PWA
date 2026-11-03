@@ -17,7 +17,8 @@ interface ApiMenu {
     remaining: number;
     canSellStandalone: boolean;
   }[];
-  groups: { id: number; title: string }[];
+  groups: { id: number; title: string; imagePath?: string }[];
+  bestSellerIds?: number[];
   memberships: { branchGroupId: number; branchFoodId: number }[];
   addons: Menu['addons'];
 }
@@ -56,7 +57,8 @@ export class CatalogService {
       this.http.get<ApiMenu>(this.url('/api/catalog/branches/' + branchId + '/menu')),
     );
     return {
-      groups: data.groups,
+      groups: data.groups.map(g => ({ id: g.id, title: g.title, image: g.imagePath ? this.url(g.imagePath) : undefined })),
+      bestSellerIds: data.bestSellerIds ?? [],
       addons: data.addons,
       foods: data.foods.map((p) => ({
         id: p.id,

@@ -21,6 +21,7 @@ export interface Food {
 export interface Group {
   id: number;
   title: string;
+  image?: string;
 }
 export interface Addon {
   id: number;
@@ -32,6 +33,7 @@ export interface Menu {
   foods: Food[];
   groups: Group[];
   addons: Addon[];
+  bestSellerIds?: number[];
 }
 export interface CartLine {
   foodId: number;

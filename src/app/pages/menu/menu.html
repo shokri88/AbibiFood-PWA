@@ -15,7 +15,7 @@
   <button class="category" (click)="group.set(0)">همه</button>
   @for (g of menu().groups; track g.id) {
     <button class="category" [class.active]="group() === g.id" (click)="group.set(g.id)">
-      {{ g.title }}
+      @if (g.image) {<img [src]="g.image" alt="" loading="lazy" />}<span>{{ g.title }}</span>
     </button>
   }
 </div>

@@ -6,7 +6,7 @@
   }
   @for (b of branches(); track b.id) {
     <button class="branch-choice" (click)="select(b)">
-      <span class="branch-symbol">⌂</span
+      <span class="branch-symbol"><i class="fa-solid fa-store" aria-hidden="true"></i></span
       ><span
         ><strong>{{ b.name }}</strong
         ><small>{{ b.address || b.area }}</small></span

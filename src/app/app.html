@@ -1,6 +1,7 @@
-@if (!online()) {
+@if (!online() && !isSplash()) {
   <div class="offline-banner" role="status">{{ settings.text('offline') }}</div>
 }
+@if (!isSplash()) {
 <header class="site-header">
   <div class="container-xxl d-flex align-items-center gap-3 py-3">
     <a routerLink="/home" class="brand"
@@ -17,21 +18,25 @@
     <a routerLink="/branches" class="branch-link ms-auto"
       ><small>شعبه انتخاب‌شده</small><strong>{{ store.branch()?.name || 'انتخاب شعبه' }}</strong></a
     ><a routerLink="/cart" class="icon-btn position-relative" aria-label="سبد خرید"
-      >♧<span class="cart-count">{{ store.count() }}</span></a
+      ><i class="fa-solid fa-basket-shopping" aria-hidden="true"></i><span class="cart-count">{{ store.count() }}</span></a
     >
   </div>
   @if (settings.config().mode === 'template') {
     <div class="demo-strip">{{ settings.text('template') }}</div>
   }
 </header>
-<main class="container-xxl main-content route-content"><router-outlet /></main>
+}
+<main [class]="isSplash() ? 'splash-content' : 'container-xxl main-content route-content'"><router-outlet /></main>
+@if (!isSplash()) {
 <nav class="bottom-nav d-lg-none" aria-label="ناوبری موبایل">
-  <a routerLink="/home" routerLinkActive="active"><span>⌂</span><small>خانه</small></a
-  ><a routerLink="/menu" routerLinkActive="active"><span>▦</span><small>منو</small></a
+  <a routerLink="/home" routerLinkActive="active"><span><i class="fa-solid fa-house" aria-hidden="true"></i></span><small>خانه</small></a
+  ><a routerLink="/menu" routerLinkActive="active"><span><i class="fa-solid fa-utensils" aria-hidden="true"></i></span><small>منو</small></a
   ><a routerLink="/cart" routerLinkActive="active" class="nav-cart"
     ><span class="nav-icon"
-      >♧<b class="nav-count">{{ store.count() }}</b></span
+      ><i class="fa-solid fa-basket-shopping" aria-hidden="true"></i><b class="nav-count">{{ store.count() }}</b></span
     ><small>سبد خرید</small></a
-  ><a routerLink="/club" routerLinkActive="active"><span>✦</span><small>باشگاه</small></a
-  ><a routerLink="/account" routerLinkActive="active"><span>○</span><small>حساب من</small></a>
+  ><a routerLink="/club" routerLinkActive="active"><span><i class="fa-solid fa-crown" aria-hidden="true"></i></span><small>باشگاه</small></a
+  ><a routerLink="/account" routerLinkActive="active"><span><i class="fa-solid fa-user" aria-hidden="true"></i></span><small>حساب من</small></a>
 </nav>
+
+}

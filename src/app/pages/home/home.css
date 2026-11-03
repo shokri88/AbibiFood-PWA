@@ -1,0 +1,18 @@
+.hero-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 20px;
+}
+.hero-copy { width: auto; }
+.hero-image {
+  position: static;
+  width: 100%;
+  max-width: 325px;
+  border: 0;
+  border-radius: 12px;
+  transform: none;
+  justify-self: center;
+}
+@media (max-width: 575.98px) {
+  .hero-inner { gap: 12px; }
+}

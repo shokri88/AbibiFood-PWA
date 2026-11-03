@@ -7,20 +7,20 @@
         <h2 class="h6">{{ food(line.foodId)?.name || 'در حال دریافت اطلاعات' }}</h2>
         <p>
           @for (id of line.addonIds; track id) {
-            <span> + {{ food(id)?.name }}</span>
+            <span><i class="fa-solid fa-plus" aria-hidden="true"></i> {{ food(id)?.name }}</span>
           }
         </p>
         <div class="qty">
-          <button (click)="store.quantity($index, 1)" aria-label="افزایش">+</button
+          <button (click)="store.quantity($index, 1)" aria-label="افزایش"><i class="fa-solid fa-plus" aria-hidden="true"></i></button
           ><span>{{ line.quantity }}</span
-          ><button (click)="store.quantity($index, -1)" aria-label="کاهش">−</button>
+          ><button (click)="store.quantity($index, -1)" aria-label="کاهش"><i class="fa-solid fa-minus" aria-hidden="true"></i></button>
         </div>
       </div>
       <strong>{{ lineTotal(line.foodId, line.addonIds, line.quantity) | number: '1.0-0' }} تومان</strong>
     </div>
   } @empty {
     <p>سبدت هنوز خالیه.</p>
-    <a routerLink="/menu">مشاهده منو ←</a>
+    <a routerLink="/menu">مشاهده منو <i class="fa-solid fa-arrow-left" aria-hidden="true"></i></a>
   }
   <div class="summary-line total">
     <strong>جمع</strong><strong>{{ total() | number: '1.0-0' }} تومان</strong>
